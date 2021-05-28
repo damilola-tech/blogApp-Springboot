@@ -14,5 +14,4 @@ public class TestDataSource {
     private String username;
     @Value("${test.datasource.password}")
     private String password;
-
 }
