@@ -24,8 +24,9 @@ public class PostController {
 
     @GetMapping("")
     public String getIndex(Model model) {
-        List<Post> postList = postServiceImpl.findAllPosts();
+        List<Post> postList = postServiceImpl.findPostInDescOrder();
         model.addAttribute("postList", postList);
+
         return "index";
     }
 
@@ -60,4 +61,11 @@ public class PostController {
     public void createPostModel(Model model) {
         model.addAttribute("postDto", new PostDto());
     }
+
+    @GetMapping("/info/{postId}")
+    public String getPostDetails(@PathVariable("postId") Integer postId, Model model);
+        log.info("Request for a post path --> {}", postId);
+
+        Post savedPost = postServiceImpl.findById()
+    return "post";
 }

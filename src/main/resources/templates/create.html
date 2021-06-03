@@ -39,9 +39,11 @@
          </div>
 
          <label for="text" class="form-label"></label>
+         <span class="alert alert-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
          <input type="text" name="text" id="text" th:field="*{title}" placeholder="Enter Post Title">
 
          <label for="message" class="form-label"></label>
+         <span class="alert alert-danger" th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
          <textarea name="message" id="message" th:field="*{content}" cols="30" rows="10" placeholder="Post content here..."></textarea>
 
          <input type="submit" value="Publish Post">

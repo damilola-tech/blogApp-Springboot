@@ -17,10 +17,11 @@ import java.util.List;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 @SpringBootTest     // To start the test configuration context.
-@Sql(scripts = {"classpath:db/insert.sql"})
+@Sql(scripts = {"classpath:db/insert.sql"}, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
 class PostRepositoryTest {
 
     @Autowired
@@ -83,7 +84,9 @@ class PostRepositoryTest {
         postRepository.save(blogPost);
         log.info("Blog post After saving --> {}", blogPost);
 
-
+        Post savedPost = postRepository.findByTitle("What is Fintech?");
+        assertThat(savedPost).isNotNull();
+        assertThat(savedPost.getAuthor()).isNotNull();
     }
 
     @Test
@@ -161,7 +164,6 @@ class PostRepositoryTest {
     @Transactional
     @Rollback(value = false)
     void addCommentToExistingPost() {
-
         // Fetch the post from the db
         Post savedPost = postRepository.findById(43).orElse(null);
         assertThat(savedPost).isNotNull();
@@ -185,20 +187,22 @@ class PostRepositoryTest {
 
         log.info("Updated Post from the database --> {}", updatedPost);
     }
+
+
+    @Test
+    @Rollback(value = false)
+    void findAllPostInDescendingOrderTest() {
+
+        List<Post> allPosts = postRepository.findByOrderByDateCreatedDesc();
+
+        assertThat(allPosts).isNotEmpty();
+        log.info("All posts --> {}", allPosts);
+
+        assertTrue(allPosts.get(0).getDateCreated().isAfter(allPosts.get(1).getDateCreated()));
+
+        allPosts.forEach(post -> {
+            log.info("Post Date {}", post.getDateCreated());
+        });
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

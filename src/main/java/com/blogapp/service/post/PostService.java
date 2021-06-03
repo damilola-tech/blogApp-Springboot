@@ -13,9 +13,11 @@ public interface PostService {
 
     List<Post> findAllPosts();
 
+    List<Post> findPostInDescOrder();
+
     Post updatePost(PostDto postDto);
 
-    Post findById(Integer Id);
+    Post findById(Integer Id) throws PostDoesNotExistsException;
 
     void deletePostById(Integer Id);
 
