@@ -37,10 +37,8 @@ class BlogAppApplicationTests {
 		}
 	}
 
-
 	@Test
 	void readValuesFromPropertiesTest() {
-
 		assertThat(testDataSource).isNotNull();
 		log.info("Test datasource values --> {}", testDataSource);
 

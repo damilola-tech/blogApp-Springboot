@@ -82,6 +82,8 @@ class PostRepositoryTest {
 
         postRepository.save(blogPost);
         log.info("Blog post After saving --> {}", blogPost);
+
+
     }
 
     @Test
