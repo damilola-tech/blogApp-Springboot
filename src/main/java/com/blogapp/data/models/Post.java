@@ -2,6 +2,7 @@ package com.blogapp.data.models;
 
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -38,6 +39,7 @@ public class Post {
     @UpdateTimestamp
     private LocalDateTime dateModified;
 
+    @ToString.Exclude
     @OneToMany(cascade = CascadeType.ALL)       // One blog_posts to many comments...that's also why its a List.
     private List<Comment> comments;
                                 // Line 44: variable-length argument; is the same as passing in an array of that type, in this case Comment
