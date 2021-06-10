@@ -190,7 +190,6 @@ class PostRepositoryTest {
 
 
     @Test
-    @Rollback(value = false)
     void findAllPostInDescendingOrderTest() {
 
         List<Post> allPosts = postRepository.findByOrderByDateCreatedDesc();
