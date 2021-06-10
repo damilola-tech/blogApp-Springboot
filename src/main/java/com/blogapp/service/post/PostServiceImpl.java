@@ -12,16 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.expression.Objects;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
 @Slf4j
-public class PostServiceImpl implements PostService {
+public class  PostServiceImpl implements PostService {
 
     @Autowired
     private PostRepository postRepository;
@@ -44,8 +44,9 @@ public class PostServiceImpl implements PostService {
             try {
                 Map<?, ?> uploadResult =
                         cloudStorageService.uploadImage(postDto.getImageFile(), ObjectUtils.asMap(
-                                "public_id", "blogapp/" + extractFileName(Objects.requireNonNull(
-                                        postDto.getImageFile().getOriginalFilename()));
+                                "public_id", "blogapp/" + extractFileName(
+                                        Objects.requireNonNull(postDto.getImageFile().getOriginalFilename())))
+                        );
 
                 log.info("Upload Response --> {}", uploadResult);
 
@@ -84,7 +85,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post findById(Integer Id)  throws PostDoesNotExistsException {
+    public Post findById(Integer id) throws PostDoesNotExistsException {
 
         if(id == null) {
             throw new NullPointerException("Post Id cannot be null");
@@ -107,7 +108,7 @@ public class PostServiceImpl implements PostService {
         return null;
     }
 
-    private String extractFileName(String filename) {
+    public static String extractFileName(String filename) {
         return filename.split("\\.")[0];
     }
 }

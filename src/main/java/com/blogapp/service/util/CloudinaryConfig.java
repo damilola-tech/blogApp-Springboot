@@ -17,3 +17,5 @@ public class CloudinaryConfig {
     @Value("${API_SECRET}")
     private String apiSecret;
 }
+
+ // e.g. this "${CLOUD_NAME}" is called Spring expression language

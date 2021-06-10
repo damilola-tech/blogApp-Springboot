@@ -1,6 +1,8 @@
 package com.blogapp.service.cloud;
 
+import com.blogapp.service.post.PostServiceImpl;
 import com.blogapp.web.dto.PostDto;
+import com.cloudinary.utils.ObjectUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +11,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.ObjectUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,7 +55,7 @@ class CloudinaryCloudStorageServiceImplTest {
     }
 
     @Test
-    void uploadMultipartImageFileTest() {
+    void uploadMultipartImageFileTest() throws IOException {
 
         PostDto postDto = new PostDto();
         postDto.setTitle("Test");
@@ -68,14 +69,18 @@ class CloudinaryCloudStorageServiceImplTest {
                 Files.readAllBytes(path));
 
         log.info("Multipart object created --> {}", multipartFile);
+
         assertThat(multipartFile).isNotNull();
         assertThat(multipartFile.isEmpty()).isFalse();
         postDto.setImageFile(multipartFile);
 
         log.info("File name --> {}", postDto.getImageFile().getOriginalFilename());
+
         cloudStorageServiceImpl.uploadImage(multipartFile, ObjectUtils.asMap(
-                "public_id", "blogapp/" + extractFileName(Objects.requireNonNull(
-                        postDto.getImageFile().getOriginalFilename()));
+                "public_id", "blogapp/" +
+                        PostServiceImpl.extractFileName(Objects.requireNonNull(
+                        postDto.getImageFile().getOriginalFilename()))
+        ));
         assertThat(postDto.getImageFile().getOriginalFilename()).isEqualTo("images.jpeg");
     }
 

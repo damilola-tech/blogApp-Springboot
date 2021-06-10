@@ -77,7 +77,7 @@ class PostRepositoryTest {
         author.setEmail("john@mail.com");
         author.setPhoneNumber("09079969734");
 
-        //map relationships
+        //map relationships(bidirectional)
         blogPost.setAuthor(author);
         author.addPost(blogPost);
 

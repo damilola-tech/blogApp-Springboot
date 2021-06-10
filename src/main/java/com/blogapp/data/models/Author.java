@@ -28,7 +28,7 @@ public class Author {
     private String phoneNumber;
 
     @OneToMany
-    @ToString.Exclude
+    @ToString.Exclude   // Exclude the toString so that List of posts will not be included wherever author is called but other instance variables here will be included
     private List<Post> posts;
 
     public void addPost(Post post) {

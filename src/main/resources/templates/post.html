@@ -1,49 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" href="../css/styles/nav.css">
-    <link rel="stylesheet" href="../css/styles/footer.css">
-    <link rel="stylesheet" href="../css/media-query/footer.css">
-    <link rel="stylesheet" href="../css/media-query/nav.css">
-    <link rel="stylesheet" href="../css/media-query/style.css">
-    <link rel="stylesheet" href="../css/styles/post.css">
-    <link rel="stylesheet" href="../css/styles/blog-post.css">
-    <link rel="stylesheet" href="../css/media-query/post.css">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/footer.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/nav.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/style.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/styles/blog-post.css}">
+    <link rel="stylesheet" th:href="@{/asset/css/media-query/post.css}">
+
     <script src="https://kit.fontawesome.com/e2052a1ca7.js" crossorigin="anonymous"></script>
 
 </head>
 
-<body>
+<body th:object="${postInfo}">
 
-    <!-- Navigation   -->
-    <nav>
-        <div class="logo">
-            <a href="/index.html">
-                <h1>PentaBlog</h1>
-            </a>
-            <div class="toggle">
-                <button>
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-
-        <ul class="links">
-            <li><a href="/index.html">home</a></li>
-            <li><a href="./post.html">post</a></li>
-            <li><a href="#">gallery</a></li>
-            <li><a href="./register.html">register</a></li>
-        </ul>
-    </nav>
-    <!-- Navigation end   -->
+    <nav th:insert="fragments.html :: topnav"></nav>
 
     <!-- Post Container -->
     <div class="post-header">
-        <h1>We Help You Create Perfect Modern Design</h1>
+        <img th:src="*{coverImageUrl}">
+        <h1 th:text="*{title}"></h1>
     </div>
     <!-- Post Container end -->
 
@@ -51,14 +33,14 @@
 
     <div class="blog-post-container">
         <div class="blog-post">
-            <a href="#" class="post-title">We Help You Create Perfect Modern Design</a>
+            <a href="#" class="post-title" th:text="*{title}"></a>
             <div class="blog-post-detail">
                 <a class="user-detail">
                     <img src="../static/asset/images/author-image1.jpg" class="user-profile">
                     <a href="" class="user-name">Jen Lopez</a>
                 </a>
 
-                <p class="date-published"> July 22, 2017</p>
+                <p class="date-published" th:text="*{dateCreated}"></p>
 
                 <a href="" class="actions">
                     <p><i class="far fa-comment"></i></p>
@@ -66,20 +48,7 @@
                 </a>
             </div>
             <div class="post-content">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur.</p>
+                <p th:text="*{content}"></p>
             </div>
 
             <!-- Comment -->
@@ -89,7 +58,7 @@
 
             <div class="comments">
                 <div class="commentator">
-                    <img src="../static/asset/images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
+                    <img src="../images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
                     
                     <div class="commentator-detail">
                         <h3 class="name">David Jones</h3>
@@ -113,7 +82,7 @@
                 </div>
 
                 <div class="commentator">
-                    <img src="../static/asset/images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
+                    <img src="../images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
                     
                     <div class="commentator-detail">
                         <h3 class="name">David Jones</h3>
@@ -125,7 +94,7 @@
                 </div>
 
                 <div class="commentator">
-                    <img src="../static/asset/images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
+                    <img src="../images/comment-image1.jpg" alt="commentator" class="commentator-img"/>
                     
                     <div class="commentator-detail">
                         <h3 class="name">David Jones</h3>
@@ -153,42 +122,42 @@
 
         </div>
         <!-- Post end -->
+        <footer th:insert="fragments.html :: footer"></footer>
 
-        
-        <!-- Footer -->
-        <footer>
-            <div class="footer-flex">
-                <div class="footer-item studio">
-                    <h3>PentaBlog Studio</h3>
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt
-                        ut
-                        labore et dolore magna aliquyam erat, sed diam voluptua.</p>
-                        <p>Copyright © 2021 Your Company - Design: Whalewalker </p>
-                    </div>
-                    <div class="footer-item">
-                        <h3>Talk to us</h3>
-                        <p> 312 Delicious Street, San Francisco, CA 10880</p>
-                        <p>09075617573</p>
-                        <p>ohida@gmail.com</p>
-                    </div>
-            </div>
+<!--        &lt;!&ndash; Footer &ndash;&gt;-->
+<!--        <footer>-->
+<!--            <div class="footer-flex">-->
+<!--                <div class="footer-item studio">-->
+<!--                    <h3>PentaBlog Studio</h3>-->
+<!--                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt-->
+<!--                        ut-->
+<!--                        labore et dolore magna aliquyam erat, sed diam voluptua.</p>-->
+<!--                        <p>Copyright © 2021 Your Company - Design: Whalewalker </p>-->
+<!--                    </div>-->
+<!--                    <div class="footer-item">-->
+<!--                        <h3>Talk to us</h3>-->
+<!--                        <p> 312 Delicious Street, San Francisco, CA 10880</p>-->
+<!--                        <p>09075617573</p>-->
+<!--                        <p>ohida@gmail.com</p>-->
+<!--                    </div>-->
+<!--            </div>-->
 
-            <div class="media">
-                <button>
-                    <a href="#" class="fa fa-facebook"></a>
-                </button>
-                <button><a href="#" class="fa fa-twitter"></a></button>
-                <button>
-                    <a href="#" class="fa fa-google-plus"></a>
-                </button>
-                <button><a href="#" class="fa fa-dribbble"></a></button>
-                <button><a href="#" class="fa fa-linkedin"></a></button>
-            </div>
-        </footer>
+<!--            <div class="media">-->
+<!--                <button>-->
+<!--                    <a href="#" class="fa fa-facebook"></a>-->
+<!--                </button>-->
+<!--                <button><a href="#" class="fa fa-twitter"></a></button>-->
+<!--                <button>-->
+<!--                    <a href="#" class="fa fa-google-plus"></a>-->
+<!--                </button>-->
+<!--                <button><a href="#" class="fa fa-dribbble"></a></button>-->
+<!--                <button><a href="#" class="fa fa-linkedin"></a></button>-->
+<!--            </div>-->
+<!--        </footer>-->
         <!-- Footer -->
 
         <!-- Scripts -->
-        <script src="../static/asset/scripts/app.js"></script>
+        <script src="../scripts/app.js"></script>
 </body>
 
 </html>

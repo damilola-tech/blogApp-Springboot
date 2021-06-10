@@ -2,13 +2,13 @@
 
 .post-header{
     min-height: 70vh;
-    background: black;
+    /*background: black;*/
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/asset/images/blog-image1.jpg");
+    /*background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/asset/images/blog-image1.jpg");*/
     background-size: cover;
-    background-position: center;
+    /*background-position: center;*/
 }
 
 .post-header h1{
