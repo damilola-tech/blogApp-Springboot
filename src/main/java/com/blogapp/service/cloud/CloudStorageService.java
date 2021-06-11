@@ -12,5 +12,4 @@ public interface CloudStorageService {
 
     Map<?, ?> uploadImage(MultipartFile file, Map<?, ?> imageProperties)
             throws IOException;
-
 }

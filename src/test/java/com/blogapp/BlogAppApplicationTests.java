@@ -22,7 +22,7 @@ class BlogAppApplicationTests {
 	TestDataSource testDataSource;
 
 	@Test
-	void applicationCanConnectToDatabaseTest(){
+	void applicationCanConnectToLocalDatabaseTest(){
 		assertThat(dataSource).isNotNull();
 		log.info("Datasource object is created");
 

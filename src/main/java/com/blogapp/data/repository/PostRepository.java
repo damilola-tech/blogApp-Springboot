@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer> {
 
+    @Query("select p from Post as p where p.title = :title")
     Post findByTitle(String title);
 
 //    @Query("select p from Post p where p.title = ?1")
@@ -20,4 +21,9 @@ public interface PostRepository extends JpaRepository<Post, Integer> {
     Post findPostTitle(@Param("title") String title);
 
     List<Post> findByOrderByDateCreatedDesc();
+
+//    More examples
+//    Post findFirstByOrderByPostedOnDesc();
+//    List<Post> findAllByOrderByPostedOnDesc();
+//    List<Post> findAllByAuthorIdOrderByPostedOnDesc();
 }

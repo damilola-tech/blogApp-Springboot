@@ -4,7 +4,6 @@ import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Data
 public class PostDto {
@@ -16,4 +15,8 @@ public class PostDto {
     private String content;
 
     private MultipartFile imageFile;
+
+//  Doing postDto manually
+//  post.setTitle(postDto.getTitle());
+//  MultipartFile: is how you handle media files e.g image, video, etc
 }
